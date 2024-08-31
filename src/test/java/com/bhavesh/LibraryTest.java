@@ -40,5 +40,16 @@ public class LibraryTest {
         assertEquals("User should not be null", exception.getMessage());
     }
 
+    @Test
+    public void testShouldAllowOnlyPermittedUserToAddBook() {
+        User user = new User("Bhavesh", User.Role.LIBRARIAN);
 
+        Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
+        library.addBook(user, book);
+
+        Book storedBook = library.getBookByISBN("9780132350884");
+
+        assertNotNull(storedBook);
+        assertEquals(book, storedBook);
+    }
 }
