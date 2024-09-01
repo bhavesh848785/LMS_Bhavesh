@@ -187,4 +187,36 @@ public class LibraryTest {
         assertNotNull(returnedBook, "Returned book have be available in the books catalog.");
     }
 
+    @Test
+    public void testShouldThrowExceptionWhenUserReturnsBookThatIsNotBorrowedByHim() {
+        User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
+        User user1 = new User("harsh", User.Role.USER);
+        User user2 = new User("dev", User.Role.USER);
+        Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
+
+        library.addUser(librarian);
+        library.addUser(user1);
+        library.addUser(user2);
+        library.addBook(librarian, book);
+
+        library.borrowBook(user1, "9780132350884");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> library.returnBook(user2, "9780132350884"));
+        assertEquals("book was not borrowed by this user", exception.getMessage());
+    }
+
+    @Test
+    public void testShouldThrowExceptionWhenNoOneBorrowedBook() {
+        User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
+        User user1 = new User("harsh", User.Role.USER);
+        Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
+
+        library.addUser(librarian);
+        library.addUser(user1);
+        library.addBook(librarian, book);
+
+        BookNotFoundException exception = assertThrows(BookNotFoundException.class, () -> library.returnBook(user1, "9780132350884"));
+        assertEquals("Book was not borrowed by any user", exception.getMessage());
+    }
+
 }
