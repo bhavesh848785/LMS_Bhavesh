@@ -123,4 +123,16 @@ public class LibraryTest {
         assertNull(borrowedBook, "borrowedBook should be null as it has been borrowed earlier.");
     }
 
+    @Test
+    public void testShouldThrowExceptionWhenBookNotFoundDuringBorrowRequest() {
+
+        User user = new User("Bhavesh", User.Role.USER);
+
+        library.addUser(user);
+
+        BookNotFoundException exception = assertThrows(BookNotFoundException.class, () -> library.borrowBook(user, "9780132350884"));
+        assertEquals("Book not found", exception.getMessage());
+    }
+
+
 }
