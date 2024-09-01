@@ -20,28 +20,28 @@ public class LibraryTest {
     }
 
     @Test
-    public void testLibraryNameShouldNotbeNull() {
+    public void Library_Name_Should_Not_be_Null() {
         assertThrows(IllegalArgumentException.class, () -> new Library(null));
     }
 
     @Test
-    public void testLibraryNameShouldNotBeEmpty() {
+    public void Library_Name_Should_Not_BeEmpty() {
         assertThrows(IllegalArgumentException.class, () -> new Library(""));
     }
 
     @Test
-    public void testLibraryNameShouldBeGreaterThan4Characters() {
+    public void Library_Name_Should_Be_Greater_Than_4_Characters() {
         assertThrows(IllegalArgumentException.class, () -> new Library("Dris"));
     }
 
     @Test
-    public void testShouldThrowExceptionIfUserIsNull() {
+    public void If_User_Is_Null() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> library.addUser(null));
         assertEquals("User should not be null", exception.getMessage());
     }
 
     @Test
-    public void testShouldAllowOnlyPermittedUserToAddBook() {
+    public void Allow_Only_Permitted_User_To_AddBook() {
         User user = new User("Bhavesh", User.Role.LIBRARIAN);
 
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -54,7 +54,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldThrowExceptionIfUnauthorizedUserAddBook() {
+    public void If_Unauthorized_User_AddBook() {
         User user = new User("Bhavesh", User.Role.USER);
 
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -63,7 +63,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldAddUserToLibrary() {
+    public void Add_User_ToLibrary() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
 
         library.addUser(librarian);
@@ -73,7 +73,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldNotAllowDuplicateUsers() {
+    public void Not_Allow_DuplicateUsers() {
         User primaryLibrarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User secondaryLibrarian = new User("Bhavesh", User.Role.LIBRARIAN);
 
@@ -83,7 +83,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldFetchUserByUsername() {
+    public void Fetch_User_By_Username() {
         User primaryLibrarian = new User("Bhavesh", User.Role.LIBRARIAN);
         library.addUser(primaryLibrarian);
         User fetchedUser = library.getUserByName("Bhavesh");
@@ -91,7 +91,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldRetrieveAllAvailableBooks(){
+    public void Retrieve_All_Available_Books(){
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         Book book1 = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
         Book book2 = new Book("9780134685991", "Effective Java", "Joshua Bloch", Year.of(2018));
@@ -108,7 +108,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldAllowToBorrowBookFromLibrary() {
+    public void Allow_To_Borrow_Book_From_Library() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user = new User("harsh", User.Role.USER);
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -124,7 +124,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenBookNotFoundDuringBorrowRequest() {
+    public void When_Book_Not_Found_During_Borrow_Request() {
 
         User user = new User("Bhavesh", User.Role.USER);
 
@@ -135,7 +135,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenBookIsAlreadyBorrowed() {
+    public void When_Book_Is_Already_Borrowed() {
 
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user1 = new User("harsh", User.Role.USER);
@@ -154,7 +154,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldReturnBorrowerNameWhoBorrowedBook() {
+    public void Return_Borrower_Name_Who_Borrowed_Book() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user = new User("harsh", User.Role.USER);
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -171,7 +171,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldAllowUserToReturnBookToLibrary() {
+    public void Allow_User_To_Return_Book_To_Library() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user = new User("harsh", User.Role.USER);
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -188,7 +188,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenUserReturnsBookThatIsNotBorrowedByHim() {
+    public void When_User_Returns_Book_That_IsNot_Borrowed_ByHim() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user1 = new User("harsh", User.Role.USER);
         User user2 = new User("dev", User.Role.USER);
@@ -206,7 +206,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenNoOneBorrowedBook() {
+    public void When_No_One_Borrowed_Book() {
         User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
         User user1 = new User("harsh", User.Role.USER);
         Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
@@ -218,5 +218,4 @@ public class LibraryTest {
         BookNotFoundException exception = assertThrows(BookNotFoundException.class, () -> library.returnBook(user1, "9780132350884"));
         assertEquals("Book was not borrowed by any user", exception.getMessage());
     }
-
 }
