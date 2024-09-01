@@ -170,6 +170,21 @@ public class LibraryTest {
         assertEquals(user.getUserName(), borrowerName);
     }
 
+    @Test
+    public void testShouldAllowUserToReturnBookToLibrary() {
+        User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
+        User user = new User("harsh", User.Role.USER);
+        Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
 
+        library.addUser(librarian);
+        library.addUser(user);
+        library.addBook(librarian, book);
+
+        library.borrowBook(user, "9780132350884");
+        library.returnBook(user, "9780132350884");
+
+        Book returnedBook = library.getBookByISBN("9780132350884");
+        assertNotNull(returnedBook, "Returned book have be available in the books catalog.");
+    }
 
 }
