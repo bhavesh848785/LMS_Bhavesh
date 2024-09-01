@@ -106,4 +106,21 @@ public class LibraryTest {
         assertTrue(availableBooks.containsKey("9780132350884"));
         assertTrue(availableBooks.containsKey("9780134685991"));
     }
+
+    @Test
+    public void testShouldAllowToBorrowBookFromLibrary() {
+        User librarian = new User("Bhavesh", User.Role.LIBRARIAN);
+        User user = new User("harsh", User.Role.USER);
+        Book book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", Year.of(2012));
+
+        library.addUser(librarian);
+        library.addUser(user);
+        library.addBook(librarian, book);
+
+        library.borrowBook(user, "9780132350884");
+
+        Book borrowedBook = library.getBookByISBN("9780132350884");
+        assertNull(borrowedBook, "borrowedBook should be null as it has been borrowed earlier.");
+    }
+
 }
