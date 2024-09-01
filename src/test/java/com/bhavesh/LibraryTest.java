@@ -81,4 +81,14 @@ public class LibraryTest {
         UserExistException exception = assertThrows(UserExistException.class, () -> library.addUser(secondaryLibrarian));
         assertEquals("User already exists in catalog", exception.getMessage());
     }
+
+    @Test
+    public void testShouldFetchUserByUsername() {
+        User primaryLibrarian = new User("Bhavesh", User.Role.LIBRARIAN);
+        library.addUser(primaryLibrarian);
+        User fetchedUser = library.getUserByName("Bhavesh");
+        assertEquals(primaryLibrarian, fetchedUser);
+    }
+
+
 }
