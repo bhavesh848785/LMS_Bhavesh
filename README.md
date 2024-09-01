@@ -1,8 +1,5 @@
 # LMS_Bhavesh
 
-If you used IntelliJ IDEA Community Edition for your project, here’s an updated version of the `README.md` to include setup instructions specific to IntelliJ IDEA:
-
-
 ## Overview
 
 The Library Management System is a Java application that allows users to perform basic library operations, such as adding books, borrowing books, returning books, and viewing available books. The project is developed following the principles of Test-Driven Development (TDD) to ensure the reliability and maintainability of the codebase.
