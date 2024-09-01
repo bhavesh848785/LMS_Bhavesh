@@ -24,7 +24,7 @@ The Library Management System is a Java application that allows users to perform
 
 1. **Clone the Repository**
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/bhavesh848785/LMS_Bhavesh.git
    cd library-management-system
    ```
 
